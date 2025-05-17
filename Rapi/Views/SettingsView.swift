@@ -101,6 +101,14 @@ struct SettingsView: View {
                             Text("All Stations")
                         }
                     }
+                /*
+                    NavigationLink(destination: RouteListView()) {
+                        HStack {
+                            Image(systemName: "train.side.front.car")
+                                .foregroundColor(.blue)
+                            Text("All Routes")
+                        }
+                    }*/
                 }
                 
                 Section(header: Text("Appearance")) {

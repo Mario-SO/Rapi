@@ -264,12 +264,64 @@ class APIService {
     
     // Async version
     func fetchRoute(byId routeId: String) async throws -> RouteDetailModel {
-        guard let url = URL(string: "\(baseURL)/routes/\(routeId)") else {
+        // Make sure the route ID is properly formatted - trim any whitespace
+        let cleanedRouteId = routeId.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard let url = URL(string: "\(baseURL)/routes/\(cleanedRouteId)") else {
+            print("Invalid URL for route ID: \(cleanedRouteId)")
             throw APIError.invalidURL
         }
         
-        let (data, _) = try await URLSession.shared.data(from: url)
-        return try JSONDecoder().decode(RouteDetailModel.self, from: data)
+        print("Fetching route with URL: \(url.absoluteString)")
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        // Print response status code for debugging
+        if let httpResponse = response as? HTTPURLResponse {
+            print("Route API Response for ID \(cleanedRouteId): \(httpResponse.statusCode)")
+            
+            // 404 - Route not found
+            if httpResponse.statusCode == 404 {
+                let dataString = String(data: data, encoding: .utf8) ?? "No data"
+                print("Route not found response: \(dataString)")
+                
+                // Try to decode as API error response
+                if let apiError = try? JSONDecoder().decode(ApiErrorResponse.self, from: data) {
+                    throw NSError(domain: "APIError", 
+                                 code: 404, 
+                                 userInfo: [NSLocalizedDescriptionKey: apiError.error])
+                }
+                
+                throw NSError(domain: "APIError", 
+                             code: 404, 
+                             userInfo: [NSLocalizedDescriptionKey: "Route with ID '\(cleanedRouteId)' not found."])
+            }
+            
+            // Other error responses
+            if httpResponse.statusCode >= 400 {
+                let errorString = String(data: data, encoding: .utf8) ?? "Unknown error"
+                print("Error response: \(errorString)")
+                
+                // Try to decode as API error response
+                if let apiError = try? JSONDecoder().decode(ApiErrorResponse.self, from: data) {
+                    throw NSError(domain: "APIError", 
+                                 code: httpResponse.statusCode, 
+                                 userInfo: [NSLocalizedDescriptionKey: "API Error: \(apiError.error)"])
+                }
+                
+                throw APIError.serverError
+            }
+        }
+        
+        do {
+            let route = try JSONDecoder().decode(RouteDetailModel.self, from: data)
+            print("Successfully decoded route with ID \(cleanedRouteId): \(route.routeShortName) - \(route.stops.count) stops")
+            return route
+        } catch {
+            print("Decoding error for route \(cleanedRouteId): \(error)")
+            print("Data received: \(String(data: data, encoding: .utf8) ?? "No data")")
+            throw error
+        }
     }
     
     // MARK: - Timetables API
