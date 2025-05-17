@@ -86,6 +86,35 @@ struct RouteStop: Codable, Identifiable {
         case stopName = "stop_name"
         case stopSequence = "stop_sequence"
     }
+    
+    // Custom decoder to handle stopSequence as String or Int
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        stopId = try container.decode(String.self, forKey: .stopId)
+        stopName = try container.decode(String.self, forKey: .stopName)
+        
+        // Try to decode stopSequence as Int first
+        if let intValue = try? container.decode(Int.self, forKey: .stopSequence) {
+            stopSequence = intValue
+        } else {
+            // If that fails, try to decode as String and convert to Int
+            let stringValue = try container.decode(String.self, forKey: .stopSequence)
+            guard let intValueFromString = Int(stringValue) else {
+                throw DecodingError.dataCorruptedError(forKey: .stopSequence,
+                                                     in: container,
+                                                     debugDescription: "stop_sequence is not a valid Int or String convertible to Int")
+            }
+            stopSequence = intValueFromString
+        }
+    }
+    
+    // If you need to encode this model back to JSON and want stopSequence as a String:
+    // func encode(to encoder: Encoder) throws {
+    //     var container = encoder.container(keyedBy: CodingKeys.self)
+    //     try container.encode(stopId, forKey: .stopId)
+    //     try container.encode(stopName, forKey: .stopName)
+    //     try container.encode(String(format: "%03d", stopSequence), forKey: .stopSequence) // Example formatting
+    // }
 }
 
 // MARK: - API Error Responses

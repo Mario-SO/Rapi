@@ -335,7 +335,7 @@ class APIService {
             return
         }
         
-        var urlComponents = URLComponents(string: "\(baseURL)/\(encodedDeparture)/\(encodedArrival)")
+        var urlComponents = URLComponents(string: "\(baseURL)/timetable/\(encodedDeparture)/\(encodedArrival)")
         
         if let date = date {
             urlComponents?.queryItems = [URLQueryItem(name: "date", value: date)]
@@ -374,7 +374,7 @@ class APIService {
             throw APIError.invalidURL
         }
         
-        var urlComponents = URLComponents(string: "\(baseURL)/\(encodedDeparture)/\(encodedArrival)")
+        var urlComponents = URLComponents(string: "\(baseURL)/timetable/\(encodedDeparture)/\(encodedArrival)")
         
         if let date = date {
             urlComponents?.queryItems = [URLQueryItem(name: "date", value: date)]
@@ -411,7 +411,7 @@ class APIService {
             return
         }
         
-        guard let url = URL(string: "\(baseURL)/\(encodedDeparture)/\(encodedArrival)/next") else {
+        guard let url = URL(string: "\(baseURL)/timetable/\(encodedDeparture)/\(encodedArrival)/next") else {
             completion(.failure(APIError.invalidURL))
             return
         }
@@ -444,7 +444,7 @@ class APIService {
             throw APIError.invalidURL
         }
         
-        guard let url = URL(string: "\(baseURL)/\(encodedDeparture)/\(encodedArrival)/next") else {
+        guard let url = URL(string: "\(baseURL)/timetable/\(encodedDeparture)/\(encodedArrival)/next") else {
             throw APIError.invalidURL
         }
         
