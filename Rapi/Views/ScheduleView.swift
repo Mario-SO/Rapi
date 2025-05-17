@@ -61,7 +61,7 @@ struct ScheduleView: View {
         NavigationView {
             ZStack {
                 // Background
-                Color(.systemGroupedBackground)
+                Color(.white)
                     .edgesIgnoringSafeArea(.all)
                 
                 if departureStationName.isEmpty || arrivalStationName.isEmpty {
@@ -188,19 +188,6 @@ struct ScheduleView: View {
                             }
                             .padding(.horizontal)
                             .padding(.vertical, 8)
-                            
-                            // // Add a manual refresh button for clarity
-                            // Button {
-                            //     Task {
-                            //         await refreshSchedule()
-                            //     }
-                            // } label: {
-                            //     Label("Refresh Schedule", systemImage: "arrow.clockwise")
-                            //         .font(.footnote)
-                            //         .foregroundColor(.blue)
-                            // }
-                            // .padding(.horizontal)
-                            // .padding(.bottom, 8)
                             
                             // Schedule list with pull-to-refresh (kept for convenience)
                             List {
@@ -503,17 +490,6 @@ struct MinimalTrainRow: View {
         .background(isNextTrain ? Color.accentColor.opacity(0.15) : Color(.systemBackground))
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
-        .overlay(
-            HStack {
-                if isNextTrain {
-                    Rectangle()
-                        .fill(Color.blue)
-                        .frame(width: 4)
-                        .cornerRadius(2)
-                }
-                Spacer()
-            }
-        )
     }
 }
 
