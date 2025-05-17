@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedTab: Tab = .nextTrain
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabBarContainerView(selectedTab: $selectedTab) {
+            ZStack {
+                switch selectedTab {
+                case .nextTrain:
+                    NextTrainView()
+                case .schedule:
+                    ScheduleView()
+                case .settings:
+                    SettingsView()
+                }
+            }
         }
-        .padding()
+        .ignoresSafeArea(.keyboard)
     }
 }
 

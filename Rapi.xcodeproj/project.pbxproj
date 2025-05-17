@@ -27,11 +27,25 @@
 		ACCCF4222DD8CC0900819BF1 /* Rapi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rapi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACCCF42F2DD8CC0A00819BF1 /* RapiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RapiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACCCF4392DD8CC0A00819BF1 /* RapiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RapiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACCCF4822DD90CBE00819BF1 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ACCCF48B2DD90E6700819BF1 /* Exceptions for "Rapi" folder in "Rapi" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ACCCF4212DD8CC0900819BF1 /* Rapi */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ACCCF4242DD8CC0900819BF1 /* Rapi */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ACCCF48B2DD90E6700819BF1 /* Exceptions for "Rapi" folder in "Rapi" target */,
+			);
 			path = Rapi;
 			sourceTree = "<group>";
 		};
@@ -78,6 +92,7 @@
 				ACCCF4242DD8CC0900819BF1 /* Rapi */,
 				ACCCF4322DD8CC0A00819BF1 /* RapiTests */,
 				ACCCF43C2DD8CC0A00819BF1 /* RapiUITests */,
+				ACCCF4812DD90CBE00819BF1 /* Frameworks */,
 				ACCCF4232DD8CC0900819BF1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +105,14 @@
 				ACCCF4392DD8CC0A00819BF1 /* RapiUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ACCCF4812DD90CBE00819BF1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACCCF4822DD90CBE00819BF1 /* EventKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +423,8 @@
 				DEVELOPMENT_TEAM = VLK59P2HMP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "To add train journeys to your calendar.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +453,8 @@
 				DEVELOPMENT_TEAM = VLK59P2HMP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "To add train journeys to your calendar.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
