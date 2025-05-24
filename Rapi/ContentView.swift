@@ -8,22 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selectedTab: Tab = .nextTrain
-    
     var body: some View {
-        TabBarContainerView(selectedTab: $selectedTab) {
-            ZStack {
-                switch selectedTab {
-                case .nextTrain:
-                    NextTrainView()
-                case .schedule:
-                    ScheduleView()
-                case .settings:
-                    SettingsView()
-                }
-            }
-        }
-        .ignoresSafeArea(.keyboard)
+        ModernTabView()
+            .ignoresSafeArea(.keyboard)
     }
 }
 
